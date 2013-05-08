@@ -8,15 +8,14 @@
  * Global Variables
  *
  * $breakup-breakpoints: List of many named breakpoints that can be called with
- *     breakup-breakpoint. Each breakpoint is a containing the breakpoint name,
- *     the media query it describes and if this breakpoint should be included
- *     when $breakup-naked is true (by default this is false). Example:
+ *     breakup-breakpoint. Each breakpoint is a list containing the breakpoint
+ *     name and the media query it describes. Example:
  *
  *     $breakup-breakpoints: (
  *       'palm' '(max-width: 480px)',
  *       'lap' '(min-width: 481px) and (max-width: 1023px)',
  *       'portable' '(max-width: 1023px)',
- *       'desk' '(min-width: 1024px)' 'allow-naked'
+ *       'desk' '(min-width: 1024px)'
  *     );
  *
  *
@@ -26,11 +25,17 @@
  * $breakup-naked: Should breakpoint/tweakpoint blocks be wrapped in an @media
  *     declaration? You should set this to true within stylesheets for browsers
  *     which don't support @media, such as oldIE.
+ *
+ *
+ * $breakup-allow-naked: List of named breakpoints and if they should be output
+ *     when $breakup-naked is true (by default this is false). This is separate
+ *     to $breakup-breakpoints because you may want to configure what
+ *     breakpoints are unwrapped on a per stylesheet basis.
  */
 $breakup-breakpoints: () !default;
 $breakup-included-blocks: () !default;
 $breakup-naked: false !default;
-
+$breakup-breakpoints-allow-naked: () !default;
 
 /**
  * Search a list of lists ($haystack) for value ($needle) at a given position
@@ -103,11 +108,16 @@ $breakup-naked: false !default;
     $breakpoint: breakup-list-key-search($breakup-breakpoints, $breakpoint-name, 1);
 
     @if $breakpoint {
-        // pad the breakpoints array so that the final value is optional
-        $breakpoint: append($breakpoint, false);
-
         $declaration: nth($breakpoint, 2);
-        $allow-naked: nth($breakpoint, 3);
+
+        // Handle Sass treating a list containing a single item as a single item
+        $allow-naked-list: $breakup-breakpoints-allow-naked;
+        @if length($allow-naked-list) == 1 {
+            $allow-naked-list: $breakup-breakpoints-allow-naked, null;
+        }
+
+        $allow-naked: index($allow-naked-list, $breakpoint-name) != false;
+
 
         // For breakpoints, the block name is the same as the breakpoint name
         @include breakup-block($breakpoint-name) {
