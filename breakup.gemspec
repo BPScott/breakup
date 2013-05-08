@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   breakpoint CSS files (e.g. base, mobile, tablet and desktop) and fallback
   files where no styles are wrapped (e.g. for oldIE which does not support media
   queries).'
-  gem.homepage = 'http://github.com/bpscott/breakup'
+  gem.homepage = 'https://github.com/bpscott/breakup'
 
   # Gem Files
   gem.files = `git ls-files`.split($/)
