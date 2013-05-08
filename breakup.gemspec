@@ -1,9 +1,12 @@
-require './lib/breakup'
+# -*- encoding: utf-8 -*-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'breakup/version'
 
 Gem::Specification.new do |gem|
   # Gem Information
-  gem.version = Breakup::VERSION
   gem.name = 'breakup'
+  gem.version = Breakup::VERSION
   gem.authors = ['Ben Scott']
   gem.email = ['ben@reload.me.uk']
   gem.description = 'Build multiple stylesheets based off globally defined breakpoints'
