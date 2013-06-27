@@ -4,49 +4,49 @@
 // A tool for defining breakpoints and conditionally loading them.
 //////////////////////////////////////////////////////////////////
 
-/**
- * Global Variables
- *
- * $breakup-breakpoints: List of many named breakpoints that can be called with
- *     breakup-breakpoint. Each breakpoint is a list containing the breakpoint
- *     name and the media query it describes. Example:
- *
- *     $breakup-breakpoints: (
- *       'palm' '(max-width: 480px)',
- *       'lap' '(min-width: 481px) and (max-width: 1023px)',
- *       'portable' '(max-width: 1023px)',
- *       'desk' '(min-width: 1024px)'
- *     );
- *
- *
- * $breakup-included-blocks: A list of blocks to render in your stylesheet
- *
- *
- * $breakup-naked: Should breakpoint/tweakpoint blocks be wrapped in an @media
- *     declaration? You should set this to true within stylesheets for browsers
- *     which don't support @media, such as oldIE.
- *
- *
- * $breakup-allow-naked: List of named breakpoints and if they should be output
- *     when $breakup-naked is true (by default this is false). This is separate
- *     to $breakup-breakpoints because you may want to configure what
- *     breakpoints are unwrapped on a per stylesheet basis.
- */
+
+// Global Variables
+//
+// $breakup-breakpoints: List of many named breakpoints that can be called with
+//     breakup-breakpoint. Each breakpoint is a list containing the breakpoint
+//     name and the media query it describes. Example:
+//
+//     $breakup-breakpoints: (
+//       'palm' '(max-width: 480px)',
+//       'lap' '(min-width: 481px) and (max-width: 1023px)',
+//       'portable' '(max-width: 1023px)',
+//       'desk' '(min-width: 1024px)'
+//     );
+//
+//
+// $breakup-included-blocks: A list of blocks to render in your stylesheet
+//
+//
+// $breakup-naked: Should breakpoint/tweakpoint blocks be wrapped in an @media
+//     declaration? You should set this to true within stylesheets for browsers
+//     which don't support @media, such as oldIE.
+//
+//
+// $breakup-allow-naked: List of named breakpoints and if they should be output
+//     when $breakup-naked is true (by default this is false). This is separate
+//     to $breakup-breakpoints because you may want to configure what
+//     breakpoints are unwrapped on a per stylesheet basis.
+///
 $breakup-breakpoints: () !default;
 $breakup-included-blocks: () !default;
 $breakup-naked: false !default;
 $breakup-breakpoints-allow-naked: () !default;
 
-/**
- * Search a list of lists ($haystack) for value ($needle) at a given position
- * ($offset). Returns that item in the list, or false if not found.
- *
- * Example:
- *  list-key-search((
- *    ('key1' 'value1'),
- *    ('key2' 'value2')
- *  ), 'key1', 1) => (key1 value1)
- */
+
+
+// Search a list of lists ($haystack) for value ($needle) at a given position
+// ($offset). Returns that item in the list, or false if not found.
+//
+// Example:
+//  list-key-search((
+//    ('key1' 'value1'),
+//    ('key2' 'value2')
+//  ), 'key1', 1) => (key1 value1)
 @function breakup-list-key-search($haystack, $needle, $offset: 1) {
     @each $haystack-item in $haystack {
         @if $needle == nth($haystack-item, $offset) {
@@ -58,16 +58,15 @@ $breakup-breakpoints-allow-naked: () !default;
 }
 
 
-/**
- * Wrapper around a @media block. if $breakup-naked is true then the
- * content is output directly if the declaration has been marked as a fallback
- * breakpoint.
- *
- * $declaration:    A @media declaration to wrap the content block in.
- * $allow-naked:    Should this content should be rendered if the we are
- *                    displaying naked content (i.e. not wrapped in a media
- *                    query).
- */
+
+// Wrapper around a @media block. if $breakup-naked is true then the
+// content is output directly if the declaration has been marked as a fallback
+// breakpoint.
+//
+// $declaration:    A @media declaration to wrap the content block in.
+// $allow-naked:    Should this content should be rendered if the we are
+//                    displaying naked content (i.e. not wrapped in a media
+//                    query).
 @mixin breakup-media($declaration, $allow-naked: false) {
     @if not $breakup-naked {
         @media #{$declaration} {
@@ -84,12 +83,11 @@ $breakup-breakpoints-allow-naked: () !default;
 }
 
 
-/**
- * Include a block in the page if it is included in within
- * $breakup-included-blocks
- *
- * $block-name:     The block name to render
- */
+
+// Include a block in the page if it is included in within
+// $breakup-included-blocks
+//
+// $block-name:     The block name to render
 @mixin breakup-block($block-name) {
     @if index($breakup-included-blocks, $block-name) != false {
         @content;
@@ -97,13 +95,12 @@ $breakup-breakpoints-allow-naked: () !default;
 }
 
 
-/**
- * Look up a named breakpoint from $breakup-breakpoints, and wrap it in a block
- * so that it only appears if it is in the current stylesheet's
- * $breakup-included-blocks.
- *
- * $breakpoint-name:     The breakpoint name to render
- */
+
+// Look up a named breakpoint from $breakup-breakpoints, and wrap it in a block
+// so that it only appears if it is in the current stylesheet's
+// $breakup-included-blocks.
+//
+// $breakpoint-name:     The breakpoint name to render
 @mixin breakup-breakpoint($breakpoint-name) {
     $breakpoint: breakup-list-key-search($breakup-breakpoints, $breakpoint-name, 1);
 
@@ -132,16 +129,15 @@ $breakup-breakpoints-allow-naked: () !default;
 }
 
 
-/**
- * Create an unnamed tweakpoint and wrap it in a block so that it only appears
- * if it is in the current stylesheet's $breakup-included-blocks.
- *
- * $declaration:    A media query that the content shall be wrapped in
- * $block-name:     The block name to display
- * $allow-naked:    Should this content should be rendered if the we are
- *                    displaying naked content (i.e. not wrapped in a media
- *                    query).
- */
+
+// Create an unnamed tweakpoint and wrap it in a block so that it only appears
+// if it is in the current stylesheet's $breakup-included-blocks.
+//
+// $declaration:    A media query that the content shall be wrapped in
+// $block-name:     The block name to display
+// $allow-naked:    Should this content should be rendered if the we are
+//                    displaying naked content (i.e. not wrapped in a media
+//                    query).
 @mixin breakup-tweakpoint($declaration, $block-name, $allow-naked: false) {
     @include breakup-block($block-name) {
         @include breakup-media($declaration, $allow-naked) {
