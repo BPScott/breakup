@@ -37,7 +37,8 @@ Breakup is distributed as a compass plugin (though it is written in pure SCSS).
 * Add `require "breakup"` to the top of your compass.rb
 * Add `@import 'breakup';` to your base stylesheets
 
-Alternatively you can copy <stylesheets/_breakup.scss> into your project and
+Alternatively you can copy
+[stylesheets/_breakup.scss](stylesheets/_breakup.scss) into your project and
 `@import` it from there.
 
 
