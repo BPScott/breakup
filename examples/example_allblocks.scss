@@ -1,0 +1,6 @@
+@import '../stylesheets/breakup.scss';
+
+$breakup-included-blocks: ('basic' 'thin' 'wide' 'full');
+
+@import 'partials/global_variables';
+@import 'partials/component';

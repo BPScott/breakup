@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sass --watch examples/*.scss --style expanded

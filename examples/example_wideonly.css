@@ -1,0 +1,5 @@
+@media (min-width: 36em) {
+  .component {
+    background-color: green;
+  }
+}

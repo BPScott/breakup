@@ -1,0 +1,14 @@
+.component {
+  background-color: red;
+}
+
+@media (max-width: 35.999em) {
+  .component {
+    background-color: blue;
+  }
+}
+@media (min-width: 36em) {
+  .component {
+    background-color: green;
+  }
+}
