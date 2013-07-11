@@ -31,13 +31,14 @@ basic styles and the unwrapped wide styles so oldIE is given the wide view).
 
 ## Installation
 
-Breakup is distributed as a compass plugin (though it is written in pure SCSS).
+Breakup is distributed as a Compass plugin (though it is written in pure SCSS,
+so works as a stand-alone file without a dependancy on Compass).
 
 * Run `gem install breakup` or add breakup to your Gemfile.
 * Add `require "breakup"` to the top of your compass.rb
 * Add `@import 'breakup';` to your base stylesheets
 
-Alternatively you can copy
+Alternatively, if you don't want to be dependant upon Compass, you can copy
 [stylesheets/_breakup.scss](stylesheets/_breakup.scss) into your project and
 `@import` it from there.
 
