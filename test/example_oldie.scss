@@ -1,0 +1,8 @@
+@import '../stylesheets/breakup.scss';
+
+$breakup-included-blocks: ('basic' 'thin' 'wide' 'full');
+$breakup-naked: true;
+$breakup-breakpoints-allow-naked: ('wide' 'full');
+
+@import 'partials/global_variables';
+@import 'partials/component';

@@ -1,0 +1,5 @@
+$breakup-breakpoints: (
+  'thin' '(max-width: 35.999em)',
+  'wide' '(min-width: 36em)',
+  'full' '(min-width: 61em)'
+);
