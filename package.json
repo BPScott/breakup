@@ -1,0 +1,31 @@
+{
+  "name": "breakup-sass",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ben Scott",
+    "email": "ben@reload.me.uk"
+  },
+  "description": "Build multiple stylesheets based off globally defined breakpoints",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bpscott/breakup"
+  },
+  "files": [
+    "stylesheets",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "devDependencies": {
+    "node-sass": "0.9.3"
+  },
+  "keywords": [
+    "breakup",
+    "media-queries",
+    "sass",
+    "css"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bpscott/breakup/issues"
+  }
+}
