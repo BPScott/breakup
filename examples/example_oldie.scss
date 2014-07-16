@@ -1,14 +1,6 @@
-.component {
-  background-color: red;
-}
+@import '../stylesheets/breakup.scss';
 
-@media (max-width: 35.999em) {
-  .component {
-    background-color: blue;
-  }
-}
-@media (min-width: 36em) {
-  .component {
-    background-color: green;
-  }
-}
+$breakup-included-blocks: ('basic' 'thin' 'wide' 'full');
+
+@import 'partials/global_variables';
+@import 'partials/component';
