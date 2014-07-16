@@ -26,8 +26,8 @@ build/rubysass/test/%.css: test/%.scss
 
 
 test: $(source_files) $(libsass_output_files) $(rubysass_output_files)
-	diff -u $(expected_output_folder) $(rubysass_output_folder)/test
-	diff -u $(expected_output_folder) $(libsass_output_folder)/test
+	diff -u --ignore-blank-lines $(expected_output_folder) $(rubysass_output_folder)/test
+	diff -u --ignore-blank-lines $(expected_output_folder) $(libsass_output_folder)/test
 
 clean:
-	rm build
+	rm -rf build
