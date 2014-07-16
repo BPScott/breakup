@@ -35,12 +35,12 @@ Breakup is compatible with both the origial ruby version of Sass and libsass.
 It is available as a rubygem and an npm package. If you don't wish to use either
 of these package managers you can also copy
 [stylesheets/_breakup.scss](stylesheets/_breakup.scss) into your project and
-`@import` it from there, as Breakup has no external dependencies.
+`@import` it from there, as Breakup is written in pure SCSS and has no external
+dependencies.
 
 ### Ruby
 
-Breakup is distributed as a Compass plugin (though it is written in pure SCSS,
-so works as a stand-alone file without a dependancy on Compass).
+Breakup is distributed as a Compass plugin.
 
 * Run `gem install breakup` or add breakup to your Gemfile.
 * Add `require "breakup"` to the top of your compass.rb
@@ -50,7 +50,7 @@ so works as a stand-alone file without a dependancy on Compass).
 
 Breakup is distributed as an npm package.
 
-* Run `npm install breakup-sass`
+* Run `npm install breakup-sass --save-dev`
 * Add `@import 'node_modules/breakup-sass/stylesheets/breakup';` to your base
   stylesheets
 
