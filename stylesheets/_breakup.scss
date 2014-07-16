@@ -68,7 +68,7 @@ $breakup-breakpoints-allow-naked: () !default;
 //                    displaying naked content (i.e. not wrapped in a media
 //                    query).
 @mixin breakup-media($declaration, $allow-naked: false) {
-    @if not $breakup-naked {
+    @if $breakup-naked != true {
         @media #{$declaration} {
             @content;
         }
