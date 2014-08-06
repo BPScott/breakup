@@ -59,6 +59,41 @@ $breakup-breakpoints-allow-naked: () !default;
 
 
 
+// Merge a list of breakpoints into an already defined $breakup-breakpoints
+// list. Returns null, as it manipulates the $breakup-breakpoints list directly.
+//
+// $breakpoints: A list of lists in the same style as $breakup-breakpoints, that
+// shall be merged into the $breakup-breakpoints list.
+@function breakup-add-breakpoints($breakpoints) {
+    @each $breakpoint in $breakpoints {
+        // Assign to a junk variable as sass doesn't let you run a function just
+        // for its side effects
+        $breakup-tmp: breakup-add-breakpoint($breakpoint...);
+    }
+    @return null;
+}
+
+
+
+// Merge a single breakpoint into an already defined $breakup-breakpoints list.
+// Returns null, as it manipulates the $breakup-breakpoints list directly.
+//
+// $breakpoint-name:    The name of the breakpoint to add
+// $value:              The media query value to add
+@function breakup-add-breakpoint($breakpoint-name, $value) {
+    // Check the breakpoint-name doesn't already exist.
+    // If if already exists, throw a warning saying the shall be overwritten
+    @if breakup-list-key-search($breakup-breakpoints, $breakpoint-name) != false {
+        @warn 'Attempting to add "#{$breakpoint-name}" to $breakup-breakpoints but it already exists. Refusing to write the new value.';
+        @return null;
+    }
+
+    $breakup-breakpoints: append($breakup-breakpoints, ($breakpoint-name $value));
+    @return null;
+}
+
+
+
 // Wrapper around a @media block. if $breakup-naked is true then the
 // content is output directly if the declaration has been marked as a fallback
 // breakpoint.
