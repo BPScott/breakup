@@ -14,4 +14,4 @@ Build gem and release
 
 Build npm package and release
 
-    npm publish . --tag 1.0.0
+    npm publish .
