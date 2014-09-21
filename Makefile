@@ -22,7 +22,7 @@ build/libsass/test/%.css: test/%.scss
 
 build/rubysass/test/%.css: test/%.scss
 	mkdir -p build/rubysass/test
-	sass $< $@
+	bundle exec sass --sourcemap=none $< $@
 
 
 test: $(source_files) $(libsass_output_files) $(rubysass_output_files)
