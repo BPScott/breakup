@@ -75,6 +75,25 @@ $breakup-breakpoints-allow-naked: () !default;
 
 
 
+// Wrapper around index as its return value differs from Sass 3.4 upwards.
+// Sass 3.2, 3.3 and libsass return false if the item is not found
+// Sass 3.4 returns null if the item is not found
+// This function follows the Sass 3.4 convention of returning null
+//
+// $list: The list to search through
+// $value: The value to search for
+@function breakup-index($list, $value) {
+    $index-result: index($list, $value);
+    @if $index-result {
+        @return $index-result;
+    }
+    @else {
+        @return null;
+    }
+}
+
+
+
 // Merge a single breakpoint into an already defined $breakup-breakpoints list.
 // Returns null, as it manipulates the $breakup-breakpoints list directly.
 //
@@ -124,7 +143,7 @@ $breakup-breakpoints-allow-naked: () !default;
 //
 // $block-name:     The block name to render
 @mixin breakup-block($block-name) {
-    @if index($breakup-included-blocks, $block-name) != false {
+    @if breakup-index($breakup-included-blocks, $block-name) != null {
         @content;
     }
 }
@@ -148,7 +167,7 @@ $breakup-breakpoints-allow-naked: () !default;
             $allow-naked-list: $breakup-breakpoints-allow-naked, null;
         }
 
-        $allow-naked: index($allow-naked-list, $breakpoint-name) != false;
+        $allow-naked: breakup-index($allow-naked-list, $breakpoint-name) != null;
 
 
         // For breakpoints, the block name is the same as the breakpoint name
